@@ -6,18 +6,28 @@ import {
 
 export default class Products extends Component{
 
-  //fetch db, SELECT * FROM products
-  products = [
-    {id: 1, name: "Product 1"},
-    {id: 2, name: "Product 2"},
-  ]
+  state = {
+    products: [
+      {id: 1, name: "Product 1"},
+      {id: 2, name: "Product 2"},
+    ]
+  }
+
+  handleAddProduct(){
+    let products = this.state.products
+    products.push({id: 3, name: "Product 3"})
+
+    this.setState({
+      products
+    })
+  }
 
   render(){
     return (
       <Container>
         <Content>
           <List>
-            {this.products.map((product)=> (
+            {this.state.products.map((product)=> (
               <ListItem
                 key={product.id}
                 onPress={()=>{
@@ -36,6 +46,9 @@ export default class Products extends Component{
               </ListItem>
             ))}
           </List>
+          <Button onPress={()=> this.handleAddProduct()}>
+            <Text>Add Product</Text>
+          </Button>
         </Content>
       </Container>
     )
